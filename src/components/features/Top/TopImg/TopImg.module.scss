@@ -1,0 +1,19 @@
+@use "../../../../styles/variables.scss" as *;
+
+
+.top__img {
+  position: absolute;
+  background: url('/images/top__img.png') no-repeat top / contain;
+  width: 60vw;
+  height: 100vh;
+  right: 0;
+  top: 0;
+}
+
+
+@media (max-width: 650px) {
+  .top__img {
+    width: 100vw;
+    height: 50vh;
+  }
+}

@@ -1,0 +1,16 @@
+@use "../../../../styles/variables.scss" as *;
+
+
+.top__scroll__down {
+  display: flex;
+  align-items: center;
+  gap: 3.472vw;
+  margin-block: auto;
+  margin-bottom: 0;
+  margin-left: 0.694vw;
+  padding-block: 0.694vw;
+  &-text {
+    color: $white__2;
+    font-size: $text__4;
+  }
+}

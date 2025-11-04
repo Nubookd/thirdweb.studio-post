@@ -1,0 +1,11 @@
+@use "../../../styles/variables.scss" as *;
+
+
+.beauty__post {
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding-block: 10vw;
+}

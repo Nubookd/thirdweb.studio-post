@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "InterRegular";
+  src: url("/fonts/Inter18pt-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InterMedium";
+  src: url("/fonts/Inter18pt-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+$white__1: rgba(255, 255, 255, 1);
+$white__2: rgba(255, 255, 255, 0.6);
+$white__3: rgba(255, 255, 255, 0.3);
+$white__4: rgba(255, 255, 255, 0.1);
+$black: rgb(0, 0, 0);
+$dark: rgba(53, 53, 53, 1);
+$blue__dark: rgba(48, 35, 174, 1);
+$blue__light: rgba(83, 160, 253, 1);
+
+$text__1: clamp(34px, 6.528vw, 94px);
+$text__2: clamp(24px, 2.361vw, 34px);
+$text__3: clamp(18px, 1.667vw, 24px);
+$text__4: clamp(12px, 1.25vw, 18px);
+
+$ff-regular: InterRegular, sans-serif;
+$ff-medium: InterMedium, sans-serif;

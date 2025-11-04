@@ -1,0 +1,82 @@
+@use "../../../styles/variables.scss" as *;
+
+.clients {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &__title {
+    color: $white__2;
+    font-size: $text__4;
+    margin-block: 30px;
+    margin-left: 6.5vw;
+  }
+  &__images {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block: 2vw;
+  }
+}
+
+.running_line {
+  overflow: hidden;
+  user-select: none;
+  gap: 20px;
+  width: 100%;
+}
+
+.items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  counter-reset: item;
+  min-width: 100%;
+}
+
+.marquee {
+  animation: scroll 20s linear infinite;
+}
+
+.reverce {
+  animation-direction: reverse;
+}
+
+.running_line-span {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  column-gap: 20px;
+}
+
+.running_line-span::before {
+  content: "";
+  background: url(/icons/runing__line-icon) center / contain no-repeat;
+  color: $white__1;
+  width: 35px;
+  aspect-ratio: 1;
+  display: flex;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 20px));
+  }
+}
+
+
+
+@keyframes marquee {
+  0% {
+    startoffset: 0%;
+  }
+  100% {
+    startoffset: 100%;
+  }
+}
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}

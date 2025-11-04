@@ -1,0 +1,30 @@
+@use "../../../../styles/variables.scss" as *;
+
+.top__title {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin-left: 0;
+  white-space: nowrap;
+  z-index: 100;
+  padding-top: 5vw;
+  padding-left: 7.986vw;
+  font-size: $text__1;
+  & > *:first-child {
+    margin-right: 20px;
+    font-size: $text__1;
+    margin: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .top__title {
+    padding-top: 50vh;
+    & > *:first-child {
+      margin-right: 0px;
+    }
+    & > *:nth-child(2) {
+      margin-right: 20px;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+@use "../../../styles/variables.scss" as *;
+
+.otherProjects {
+  padding-block: 10vw;
+  overflow-x: hidden;
+  &__title {
+    font-family: $ff-medium;
+    font-size: $text__1;
+    text-align: left;
+    margin-bottom: 0.694vw;
+    margin-left: 2.778vw;
+
+    display: inline-block;
+    position: relative;
+  }
+}
+
+.slider {
+  &__inner {
+    display: flex;
+    justify-content: flex-start;
+    img {
+      min-width: 33.333%;
+      padding-inline: 2.778vw;
+      height: auto;
+    }
+  }
+  &__footer {
+    padding-left: 2.778vw;
+    padding-top: 2.778vw;
+    padding-right: 0.833vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__counter {
+    display: flex;
+    gap: 10px;
+
+    &-span {
+      background-color: $white__3;
+      width: 30px;
+      height: 5px;
+      // cursor: pointer;
+      transition: 0.3s ease;
+    }
+  }
+}
+
+.slider__buttons {
+  float: right;
+}
+.active {
+  background-color: $white__1;
+  width: 40px;
+}
+
+.disabled {
+  color: $white__3;
+}

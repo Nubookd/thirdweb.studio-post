@@ -1,0 +1,102 @@
+@use "../../../styles/variables.scss" as *;
+
+.helpGrowe {
+  padding-block: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 5.556vw;
+  &__title {
+    font-family: $ff-medium;
+    font-size: $text__1;
+    text-align: left;
+    margin-left: 2.778vw;
+  }
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 2.778vw;
+    gap: 5.556vw;
+    &-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1.736vw;
+      color: $white__3;
+      font-size: $text__3;
+      min-width: 20%;
+      transition: 0.3s;
+      & > * {
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+        margin: 0.5vw 1.389vw;
+      }
+    }
+    &-img {
+      &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5.556vw;
+        width: 60%;
+      }
+      &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 1.736vw;
+        color: $white__3;
+        font-size: $text__3;
+        width: 50%;
+        & > * {
+          display: flex;
+          flex-direction: column;
+          white-space: nowrap;
+          margin: 0;
+        }
+        & > *:first-child {
+          white-space: wrap;
+          color: $white__1;
+        }
+      }
+    }
+  }
+}
+
+.active {
+  color: $white__1;
+  margin: 0;
+}
+
+@media (max-width: 930px) {
+  .helpGrowe {
+    &__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      &-img {
+        &__container {
+          width: 100%;
+        }
+        &__text {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .helpGrowe {
+    &__inner {
+      &-img {
+        &__container {
+          img {
+            display: none;
+          }
+        }
+        &__text {
+          width: 80%;
+        }
+      }
+    }
+  }
+}

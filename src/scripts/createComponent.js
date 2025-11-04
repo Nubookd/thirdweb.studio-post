@@ -1,78 +1,63 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+// Получаем текущую директорию в ES модулях
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Путь к папке components (из scripts -> src -> components)
-const componentsPath = path.resolve(__dirname, "..", "components");
+// Путь к папке components
+const srcPath = path.join(__dirname, '..');
+const componentsPath = path.join(srcPath, 'components');
 
 const componentName = process.argv[2];
 if (!componentName) {
-  console.error("Укажите имя компонента");
+  console.error('❌ Please provide component name: npm run createComponent ComponentName');
   process.exit(1);
 }
 
-// Путь к файлу компонента
-const filePath = path.join(componentsPath, `${componentName}.jsx`);
+// Создаем пути для папки компонента
+const componentPathType = process.argv[3]
+const componentDir = path.join(componentsPath, componentPathType, componentName);
 
-const jsxContent = `import React from 'react'
+try {
+  // Создаем папку компонента
+  fs.mkdirSync(componentDir, { recursive: true });
+  console.log(`📁 Created folder: ${componentDir}`);
 
-export default function ${componentName}() {
+  // Шаблон компонента
+  const componentTemplate = `import styles from './${componentName}.module.scss';
+
+export default function ${componentName}({ children }) {
   return (
-    <></>
-  )
+    <div className={styles.container}>
+      {children}
+    </div>
+  );
 }
 `;
 
+  // Шаблон стилей
+  const stylesTemplate = `@use "../../../styles/variables.scss" as *;
+`;
 
-// Проверяем, не существует ли уже файл
-if (fs.existsSync(filePath)) {
-  console.error(`❌ Файл ${componentName}.jsx уже существует!`);
+  // Шаблон index.js для чистого импорта
+  const indexTemplate = `export { default } from './${componentName}';
+`;
+
+  // Создаем файлы
+  fs.writeFileSync(path.join(componentDir, `${componentName}.jsx`), componentTemplate);
+  fs.writeFileSync(path.join(componentDir, `${componentName}.module.scss`), stylesTemplate);
+  fs.writeFileSync(path.join(componentDir, 'index.js'), indexTemplate);
+
+  console.log(`✅ Component ${componentName} created successfully!`);
+  console.log(`📁 Location: ${componentDir}`);
+  console.log('📝 Created files:');
+  console.log(`   - ${componentName}.jsx`);
+  console.log(`   - ${componentName}.module.scss`);
+  console.log(`   - index.js`);
+
+} catch (error) {
+  console.error('❌ Error creating component:', error.message);
   process.exit(1);
 }
-
-// Создаем файл
-fs.writeFileSync(filePath, jsxContent);
-console.log(`✅ Компонент создан: ${filePath}`);
-
-
-
-
-// ====== С папкой
-
-
-// const folderPath = path.join(srcPath, "components", componentName);
-
-// if (!fs.existsSync(folderPath)) {
-//   fs.mkdirSync(folderPath, { recursive: true });
-//   console.log(`Папка создана: ${folderPath}`);
-// } else {
-//   console.log(`Папка уже существует: ${folderPath}`);
-// }
-
-// const jsxContent = `import React from 'react'
-// import styles from './${componentName}.module.scss';
-
-// export default function ${componentName}() {
-//   return (
-//     <div>ModalCreatePointTask</div>
-//   )
-// }
-// `;
-
-// const scssContent = `@use "../../assets/styles/variables.scss" as *;
-
-// .container {
-//   /* Стили для ${componentName} */
-// }
-// `;
-
-// fs.writeFileSync(path.join(folderPath, `${componentName}.jsx`), jsxContent);
-// fs.writeFileSync(
-//   path.join(folderPath, `${componentName}.module.scss`),
-//   scssContent
-// );
-
-// console.log(`Компонент ${componentName} создан в ${folderPath}`);
