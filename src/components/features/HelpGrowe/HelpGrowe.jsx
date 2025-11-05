@@ -14,11 +14,11 @@ export default function HelpGrowe({ children }) {
 
   return (
     <section className={styles.helpGrowe}>
-      <span className={styles.helpGrowe__title}>
+      <h2 className={styles.helpGrowe__title}>
         How we can
         <br />
         help grow
-      </span>
+      </h2>
       <div className={styles.helpGrowe__inner}>
         <span className={styles["helpGrowe__inner-text"]}>
           <span

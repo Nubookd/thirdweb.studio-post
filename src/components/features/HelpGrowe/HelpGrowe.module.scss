@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: 5.556vw;
   &__title {
-    font-family: $ff-medium;
+    font-family: $ff-light;
     font-size: $text__1;
     text-align: left;
     margin-left: 2.778vw;
@@ -25,6 +25,7 @@
       font-size: $text__3;
       min-width: 20%;
       transition: 0.3s;
+      // padding-right: 10px;
       & > * {
         display: flex;
         flex-direction: column;

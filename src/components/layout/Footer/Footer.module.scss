@@ -1,3 +1,5 @@
-.container {
-  /* Add your styles here */
+@use "../../../styles/variables.scss" as *;
+
+.footer {
+  display: flex;
 }

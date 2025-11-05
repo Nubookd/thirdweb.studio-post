@@ -60,7 +60,7 @@ export default function Description() {
   return (
     <section className={styles.description}>
       <div className={styles.description__inner}>
-        <div className={styles.description__title}>What is Web3 studio?</div>
+        <h2 className={styles.description__title}>What is Web3 studio?</h2>
         <div className={styles.description__text}>
           Things around crypto, NFTs and web3 as a whole are unbelievably
           interesting. Unfortunately, the overall usability as well as the

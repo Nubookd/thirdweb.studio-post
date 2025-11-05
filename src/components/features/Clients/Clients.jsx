@@ -4,7 +4,7 @@ import styles from "./Clients.module.scss";
 export default function Clients({ children }) {
   return (
     <section className={styles.clients}>
-      <span className={styles.clients__title}>Our clients are backed by:</span>
+      <h2 className={styles.clients__title}>Our clients are backed by:</h2>
       <div className={`${styles.clients__images} ${styles.running_line}`}>
         <div className={`${styles.items} ${styles.marquee}`}>
           <div>

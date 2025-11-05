@@ -1,3 +1,4 @@
+import About from "../About";
 import BeautyPost from "../BeautyPost";
 import Clients from "../Clients";
 import Description from "../Description";
@@ -16,6 +17,12 @@ export default function Main({ children }) {
       <Projects />
       <OtherProject />
       <BeautyPost />
+      <HelpGrowe />
+      <About />
+
+      <HelpGrowe />
+      <HelpGrowe />
+      <HelpGrowe />
       <HelpGrowe />
     </>
   );

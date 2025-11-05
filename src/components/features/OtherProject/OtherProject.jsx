@@ -65,7 +65,7 @@ export default function OtherProject({ children }) {
 
   return (
     <section className={styles.otherProjects}>
-      <span className={styles.otherProjects__title}>Other Projects</span>
+      <h2 className={styles.otherProjects__title}>Other Projects</h2>
       <div className={styles.slider}>
         <div ref={textRef} className={styles.slider__inner}>
           {imgArray.map((img, index) => (

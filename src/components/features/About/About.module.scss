@@ -1,0 +1,105 @@
+@use "../../../styles/variables.scss" as *;
+
+.about {
+  padding-block: 10vw;
+  width: 100%;
+  position: relative;
+
+  &__wrap {
+    position: relative;
+    margin: 0 30.556vw 200px 30.556vw;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    &-title {
+      font-family: $ff-light;
+      font-size: $text__1;
+    }
+    &-text {
+      font-size: $text__3;
+      color: $white__2;
+      margin-bottom: 2.083vw;
+      line-height: 138%;
+    }
+    &-link {
+      display: flex;
+      &-text {
+        font-size: $text__3;
+        position: relative;
+        transition: 0.3s;
+        width: auto;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        &:hover{
+          gap: 3vw;
+          scale: 1.1;
+        }
+        &::after {
+          content: "";
+          color: $white__1;
+          background: url("data:image/svg+xml;charset=UTF-8,%3csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M39.3158 20H1.70898' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M25.6406 6.66699L39.3158 20.0003L25.6406 33.3337' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e ")
+            no-repeat center / contain;
+          width: 2.778vw;
+          min-width: 20px;
+          aspect-ratio: 1;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  &__image {
+    border: none;
+    max-width: 20vw;
+    & > * {
+      position: absolute;
+      height: auto;
+      margin: 10px;
+      color: $black;
+      z-index: 10;
+      will-change: transform;
+      min-width: 100px;
+    }
+    &-1 {
+      width: 16vw;
+      top: 0;
+      left: 0;
+    }
+    &-2 {
+      width: 16vw;
+      top: 30%;
+      right: 0;
+    }
+    &-3 {
+      width: 20vw;
+      bottom: 0;
+      left: 30%;
+      min-width: 120px;
+    }
+  }
+}
+
+@media (max-width: 738px) {
+  .about {
+    &__wrap {
+      margin: 0 20vw 200px 20vw;
+      display: flex;
+      flex-direction: column;
+      &-title {
+        font-family: $ff-regular;
+        font-size: $text__1;
+      }
+      &-text {
+        font-size: $text__3;
+        color: $white__2;
+        margin-bottom: 2.083vw;
+        line-height: 138%;
+      }
+      &-link {
+        font-size: $text__3;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ import styles from './Projects.module.scss';
 export default function Projects({ children }) {
   return (
     <section className={styles.projects}>
-      <span className={styles.projects__title}>Projects</span>
+      <h2 className={styles.projects__title}>Projects</h2>
       <div className={styles.projects__inner}>
         <div className={styles['projects__inner-1']}></div>
         <div className={styles['projects__inner-2']}></div>
