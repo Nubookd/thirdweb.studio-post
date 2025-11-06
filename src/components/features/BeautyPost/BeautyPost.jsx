@@ -14,7 +14,7 @@ export default function BeautyPost({ children }) {
   const pathRef__7 = useRef();
   const pathRef__8 = useRef();
   const pathRef__9 = useRef();
-  const pathContainer = useRef()
+  const pathContainer = useRef() 
 
   const pathRefsArray = {
     pathRef__1,

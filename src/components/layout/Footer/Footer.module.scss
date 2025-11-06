@@ -2,4 +2,57 @@
 
 .footer {
   display: flex;
+  padding-block: 10vw;
+  padding-inline: 2.778vw;
+  & > * {
+    width: 33%;
+  }
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: 5.556vw;
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    &-title {
+      font-family: $ff-light;
+      font-size: $text__2;
+    }
+    &-text {
+      color: $white__2;
+      font-size: $text__3;
+    }
+    &-email {
+      font-family: $ff-light;
+      font-size: $text__3;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: 0.3s;
+      &:hover {
+        gap: 3vw;
+        scale: 1.1;
+      }
+      &::after {
+        content: "";
+        color: $white__1;
+        background: url("data:image/svg+xml;charset=UTF-8,%3csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M39.3158 20H1.70898' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'/%3e%3cpath d='M25.6406 6.66699L39.3158 20.0003L25.6406 33.3337' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e ")
+          no-repeat center / contain;
+        width: 2.778vw;
+        min-width: 20px;
+        aspect-ratio: 1;
+        display: inline-block;
+      }
+    }
+  }
+  &__links {
+    &-ul {
+    }
+    &-li {
+    }
+  }
+  &__drag-up {
+  }
 }

@@ -45,7 +45,7 @@ export const animationInfinity = (refs) => {
           },
           paused: true,
           ease: "none",
-          delay: index * 0.06,
+          delay: index * 0.1,
           onComplete: () => {
             gsap.to(letter, {
               duration: 6,
@@ -56,6 +56,7 @@ export const animationInfinity = (refs) => {
                 autoRotate: true,
               },
               ease: "none",
+              delay: index * 0.005,
               repeat: 0,
               onComplete: () => {
                 gsap.to(letter, {
@@ -133,6 +134,7 @@ export const animationInfinity = (refs) => {
                 autoRotate: true,
               },
               ease: "none",
+              delay: index * 0.005,
               repeat: 0,
               onComplete: () => {
                 gsap.to(letter, {
