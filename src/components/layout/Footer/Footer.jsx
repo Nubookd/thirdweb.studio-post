@@ -33,7 +33,9 @@ export default function Footer({ children }) {
           <li className={styles["footer__links-li"]}>Linkedin</li>
         </ul>
       </div>
-      <div className={styles['footer__drag-up']}>Back to top</div>
+      <div className={styles["footer__drag-container"]}>
+        <div className={styles["footer__drag-container-up"]}>Back to top</div>
+      </div>
     </footer>
   );
 }

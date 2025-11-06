@@ -8,5 +8,20 @@
   margin-top: 50px;
   min-height: calc(100vh - 70px);
   font-size: $text__1;
+  &__halloween {
+    position: absolute;
+    width: 25vw;
+    top: 65%;
+    right: -10%;
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    &-path {
+      fill: rgba(249, 166, 70, 0.6);
+    }
+  }
 }
 

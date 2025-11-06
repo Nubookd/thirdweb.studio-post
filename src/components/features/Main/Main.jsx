@@ -19,11 +19,6 @@ export default function Main({ children }) {
       <BeautyPost />
       <HelpGrowe />
       <About />
-
-      <HelpGrowe />
-      <HelpGrowe />
-      <HelpGrowe />
-      <HelpGrowe />
     </>
   );
 }

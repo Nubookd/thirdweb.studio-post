@@ -89,9 +89,6 @@ export const animationInfinity = (refs) => {
           trigger: containerRef.current,
           start: "top 80%",
           onEnter: () => animation.play(),
-          onEnterBack: () => animation.play(),
-          onLeave: () => animation.pause(),
-          onLeaveBack: () => animation.pause(),
 
           once: false,
         });
@@ -169,9 +166,6 @@ export const animationInfinity = (refs) => {
           trigger: containerRef.current,
           start: "top 80%",
           onEnter: () => animation.play(),
-          onEnterBack: () => animation.play(),
-          onLeave: () => animation.pause(),
-          onLeaveBack: () => animation.pause(),
 
           once: false,
         });

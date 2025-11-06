@@ -3,6 +3,7 @@
 .otherProjects {
   padding-block: 10vw;
   overflow-x: hidden;
+  position: relative;
   &__title {
     font-family: $ff-light;
     font-size: $text__1;
@@ -12,6 +13,21 @@
 
     display: inline-block;
     position: relative;
+  }
+  &__halloween {
+    position: absolute;
+    width: 25vw;
+    top: 60%;
+    left: -10%;
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    &-path {
+      fill: rgba(249, 166, 70, 0.6);
+    }
   }
 }
 
