@@ -14,7 +14,9 @@ export default function Footer({ children }) {
           </span>
         </div>
         <span className={styles["footer__description-email"]}>
-          hello@thirdweb.studio
+          <span className={styles["footer__description-email-text"]}>
+            hello@thirdweb.studio
+          </span>
         </span>
       </div>
       <div className={styles.footer__links}>
@@ -34,7 +36,11 @@ export default function Footer({ children }) {
         </ul>
       </div>
       <div className={styles["footer__drag-container"]}>
-        <div className={styles["footer__drag-container-up"]}>Back to top</div>
+        <div className={styles["footer__drag-container-up"]}>
+          <span className={styles["footer__drag-container-up-text"]}>
+            Back to top
+          </span>
+        </div>
       </div>
     </footer>
   );
