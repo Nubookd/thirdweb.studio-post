@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import styles from "./OtherProject.module.scss";
 import { Slider } from "./slider";
 import { gsap } from "gsap";
-import ScrollTrigger from "gsap";
+import { motion } from "framer-motion";
+import appearance from "@/lib/animation/appearance";
 
 export default function OtherProject({ children }) {
   const textRef = useRef();
@@ -98,7 +99,12 @@ export default function OtherProject({ children }) {
 
   return (
     <section className={styles.otherProjects}>
-      <h2 className={styles.otherProjects__title}>Other Projects</h2>
+      <motion.h2
+        {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+        className={styles.otherProjects__title}
+      >
+        Other Projects
+      </motion.h2>
       <div className={styles.slider}>
         <div ref={textRef} className={styles.slider__inner}>
           {imgArray.map((img, index) => (

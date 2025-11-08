@@ -4,6 +4,8 @@ import styles from "./Description.module.scss";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { animationInfinity, createRefs } from "./animation";
+import { motion } from "framer-motion";
+import appearance from "@/lib/animation/appearance";
 
 export default function Description() {
   const pathRef__1 = useRef();
@@ -61,14 +63,22 @@ export default function Description() {
   return (
     <section className={styles.description}>
       <div className={styles.description__inner}>
-        <h2 className={styles.description__title}>What is Web3 studio?</h2>
-        <div className={styles.description__text}>
+        <motion.h2
+          {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+          className={styles.description__title}
+        >
+          What is Web3 studio?
+        </motion.h2>
+        <motion.div
+        {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+          className={styles.description__text}
+        >
           Things around crypto, NFTs and web3 as a whole are unbelievably
           interesting. Unfortunately, the overall usability as well as the
           quality of the UI is often still not up to the task. To achieve mass
           adoption, overcoming those hurdles will be key. And this is where our
           story begins.
-        </div>
+        </motion.div>
       </div>
       <div ref={containerRef} className={styles.description__svgContainer}>
         <svg

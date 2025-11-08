@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./HelpGrowe.module.scss";
 import Image from "next/image";
 import content from "./content";
+import { motion } from "framer-motion";
+import appearance from "@/lib/animation/appearance";
 
 export default function HelpGrowe({ children }) {
   const [nowSection, setnowSection] = useState(0);
@@ -14,45 +16,71 @@ export default function HelpGrowe({ children }) {
 
   return (
     <section className={styles.helpGrowe}>
-      <h2 className={styles.helpGrowe__title}>
+      <motion.h2
+        {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+        className={styles.helpGrowe__title}
+      >
         How we can
         <br />
         help grow
-      </h2>
+      </motion.h2>
       <div className={styles.helpGrowe__inner}>
         <span className={styles["helpGrowe__inner-text"]}>
-          <span
+          <motion.span
+            {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
             className={nowSection === 0 ? styles.active : ""}
             onClick={() => handleSection(0)}
           >
             Product clarity
-          </span>
-          <span
+          </motion.span>
+          <motion.span
+            {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
             className={nowSection === 1 ? styles.active : ""}
             onClick={() => handleSection(1)}
           >
             UX/UI design
-          </span>
-          <span
+          </motion.span>
+          <motion.span
+            {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
             className={nowSection === 2 ? styles.active : ""}
             onClick={() => handleSection(2)}
           >
             Maintain process
-          </span>
+          </motion.span>
         </span>
         <div className={styles["helpGrowe__inner-img__container"]}>
-          <Image
-            src={content[nowSection].img.src}
-            alt={content[nowSection].img.alt}
-            width={content[nowSection].img.width}
-            height={content[nowSection].img.height}
-          />
+          <motion.div
+            {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+          >
+            <Image
+              src={content[nowSection].img.src}
+              alt={content[nowSection].img.alt}
+              width={content[nowSection].img.width}
+              height={content[nowSection].img.height}
+            />
+          </motion.div>
           <div className={styles["helpGrowe__inner-img__text"]}>
-            <span>{content[nowSection].description}</span>
+            <motion.span
+              {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+            >
+              {content[nowSection].description}
+            </motion.span>
             <ul>
-              <li>{content[nowSection].features[0]}</li>
-              <li>{content[nowSection].features[1]}</li>
-              <li>{content[nowSection].features[2]}</li>
+              <motion.li
+                {...appearance.getAppearanceScroll(appearance.appearanceRight)}
+              >
+                {content[nowSection].features[0]}
+              </motion.li>
+              <motion.li
+                {...appearance.getAppearanceScroll(appearance.appearanceRight)}
+              >
+                {content[nowSection].features[1]}
+              </motion.li>
+              <motion.li
+                {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+              >
+                {content[nowSection].features[2]}
+              </motion.li>
             </ul>
           </div>
         </div>

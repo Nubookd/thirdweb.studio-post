@@ -1,18 +1,41 @@
-import styles from './Projects.module.scss';
+"use client";
+import styles from "./Projects.module.scss";
+import { motion } from "framer-motion";
+import appearance from "@/lib/animation/appearance";
 
 export default function Projects({ children }) {
   return (
     <section className={styles.projects}>
-      <h2 className={styles.projects__title}>Projects</h2>
+      <motion.h2
+        {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+        className={styles.projects__title}
+      >
+        Projects
+      </motion.h2>
       <div className={styles.projects__inner}>
-        <div className={styles['projects__inner-1']}></div>
-        <div className={styles['projects__inner-2']}></div>
-        <div className={styles['projects__inner-3']}></div>
-        <div className={styles['projects__inner-4']}></div>
-        <div className={styles['projects__inner-5']}>
+        <motion.div
+          {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
+          className={styles["projects__inner-1"]}
+        ></motion.div>
+        <motion.div
+          {...appearance.getAppearanceScroll(appearance.appearanceRight)}
+          className={styles["projects__inner-2"]}
+        ></motion.div>
+        <motion.div
+          {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
+          className={styles["projects__inner-3"]}
+        ></motion.div>
+        <motion.div
+          {...appearance.getAppearanceScroll(appearance.appearanceRight)}
+          className={styles["projects__inner-4"]}
+        ></motion.div>
+        <motion.div
+          {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
+          className={styles["projects__inner-5"]}
+        >
           <span>How we design web3 products</span>
           <button>coming soon</button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

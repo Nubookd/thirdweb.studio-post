@@ -5,6 +5,8 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import appearance from "@/lib/animation/appearance";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,14 +45,27 @@ export default function About({ children }) {
   return (
     <div ref={aboutContainerRef} className={styles.about}>
       <div className={styles.about__wrap}>
-        <h2 className={styles["about__wrap-title"]}>About</h2>
-        <span className={styles["about__wrap-text"]}>
+        <motion.h2
+          {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+          className={styles["about__wrap-title"]}
+        >
+          About
+        </motion.h2>
+        <motion.span
+          {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+          className={styles["about__wrap-text"]}
+        >
           Team of product and brand designers that are really passionate about
           blockchain technology and good design. We are not just UI freaks! We
           advocate users for better product experience and common sense.
-        </span>
+        </motion.span>
         <span className={styles["about__wrap-link"]}>
-          <span className={styles["about__wrap-link-text"]}>More about us</span>
+          <motion.span
+            {...appearance.getAppearanceScroll(appearance.appearanceLeft)}
+            className={styles["about__wrap-link-text"]}
+          >
+            More about us
+          </motion.span>
         </span>
       </div>
       <div className={styles.about__image}>
