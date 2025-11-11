@@ -39,6 +39,11 @@
       }
     }
   }
+  div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
   &__menu {
     display: flex;

@@ -5,6 +5,7 @@ import Logo from "@/components/ui/Logo";
 import styles from "./Header.module.scss";
 import { motion } from "framer-motion";
 import appearance from "@/lib/animation/appearance";
+import Login from "../Login";
 
 export default function Header({ children }) {
   return (
@@ -39,6 +40,7 @@ export default function Header({ children }) {
         </ul>
       </nav>
       <div>
+        <Login />
         <div className={styles.header__menu}>
           <motion.span
             {...appearance.getAppearance(appearance.appearanceLeft, 0.8)}

@@ -1,8 +1,11 @@
 import Main from "@/components/features/Main";
-
+import Post from "@/components/features/Post";
 
 export default function Home() {
   return (
-    <Main />
+    <>
+      <Main />
+      <Post />
+    </>
   );
 }
