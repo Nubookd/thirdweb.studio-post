@@ -68,7 +68,6 @@ export class Slider {
   next = () => {
     if (this.isAnimating) return;
     if (this.index < this.imgArray.length - 3) {
-      console.log(this.index);
       this.isAnimating = true;
       this.index++;
       const now_x = gsap.getProperty(this.element, "x");
@@ -92,7 +91,6 @@ export class Slider {
     this.sliderCounter.innerHTML = "";
 
     this.imgArray.slice(0, -2).forEach((el, index) => {
-      console.log(`${index}  ${this.index}`);
       const span = document.createElement("span");
       if (index === this.index) {
         span.classList.add(this.styles["slider__counter-span"]);

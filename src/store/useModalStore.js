@@ -1,8 +1,9 @@
 const { create } = require("zustand");
-
 const useModalStore = create((set) => ({
-  showModal: null,
+  showModal: false,
   showLoginModal: () => set({ showModal: "login" }),
   showRegisterModal: () => set({ showModal: "register" }),
-  hideModal: () => set({ showModal: null }),
+  closeModal: () => set({ showModal: false }),
 }));
+
+export default useModalStore;

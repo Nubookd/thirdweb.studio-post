@@ -1,1 +1,58 @@
-@use "../../../styles/variables.scss" as *;
+@use "../../../../styles/variables.scss" as *;
+
+.loginModal {
+  position: fixed;
+  width: 20%;
+  aspect-ratio: 1;
+  background-color: $white__2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  padding: 1vw;
+  border-radius: 5px;
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    &-signUp {
+      border: 0;
+      border-radius: 10px;
+      background-color: $white__3;
+      font-size: $text__3;
+    }
+    &-signIn {
+      border: 0;
+      background-color: transparent;
+      font-size: $text__4;
+      color: $blue__dark;
+      display: flex;
+      flex-direction: column;
+      margin-inline: auto;
+      &::after {
+        content: "";
+        width: 0;
+        height: 2px;
+        background-color: $blue__light;
+        transition: width 0.3s ease;
+      }
+      &:hover {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+.error {
+  border: 2px red solid;
+  color: red;
+}
