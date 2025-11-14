@@ -1,17 +1,21 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./Login.module.scss";
 import useModalStore from "@/store/useModalStore";
 import appearance from "@/lib/animation/appearance";
+import useLoginStore from "@/store/useLoginStore";
 
 export default function Login({ children }) {
-  const [login, setLogin] = useState(false);
-  const {showLoginModal} = useModalStore();
+  const { login } = useLoginStore();
+  const { showLoginModal } = useModalStore();
 
   return (
-    <motion.div className={styles.login} onClick={showLoginModal} {...appearance.getAppearance(appearance.appearanceUp, 0.8)}>
+    <motion.div
+      className={styles.login}
+      onClick={showLoginModal}
+      {...appearance.getAppearance(appearance.appearanceUp, 0.8)}
+    >
       {login ? (
         <svg
           width="100%"
@@ -21,8 +25,8 @@ export default function Login({ children }) {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M16.5626 18H3.43818C2.73178 18 2.21015 17.303 2.47658 16.662C3.71277 13.698 6.61694 12 9.99986 12C13.3838 12 16.288 13.698 17.5242 16.662C17.7906 17.303 17.269 18 16.5626 18ZM5.91667 5.99999C5.91667 3.79399 7.749 1.99999 9.99986 1.99999C12.2517 1.99999 14.083 3.79399 14.083 5.99999C14.083 8.20599 12.2517 9.99999 9.99986 9.99999C7.749 9.99999 5.91667 8.20599 5.91667 5.99999ZM19.9557 17.636C19.2136 14.277 16.8923 11.798 13.837 10.673C15.456 9.39597 16.4003 7.33094 16.0532 5.06993C15.651 2.44693 13.4236 0.347977 10.7348 0.0419769C7.02322 -0.381023 3.87507 2.44899 3.87507 5.99999C3.87507 7.88999 4.76929 9.57397 6.1637 10.673C3.10744 11.798 0.787164 14.277 0.044024 17.636C-0.225466 18.857 0.778999 20 2.05397 20H17.9457C19.2217 20 20.2262 18.857 19.9557 17.636Z"
             fill="black"
           />

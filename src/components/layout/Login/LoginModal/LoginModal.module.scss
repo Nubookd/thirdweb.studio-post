@@ -2,9 +2,9 @@
 
 .loginModal {
   position: fixed;
-  width: 20%;
-  aspect-ratio: 1;
-  background-color: $white__2;
+  width: 50vw;
+  height: 40vh;
+  background-color: $dark;
   top: 0;
   bottom: 0;
   left: 0;
@@ -20,26 +20,52 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 20px;
-    &-signUp {
-      border: 0;
-      border-radius: 10px;
-      background-color: $white__3;
+    label {
+      font-size: $text__2;
+      text-align: center;
+    }
+    &-inputInner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      width: 100%;
+    }
+    &-input {
+      width: 80%;
       font-size: $text__3;
     }
-    &-signIn {
+    &-inputSpan {
+      font-size: $text__4;
+      color: red;
+    }
+    &-signNow {
+      border: 0;
+      border-radius: 10px;
+      background-color: $blue__light;
+      font-size: $text__3;
+      padding: 0.3vw 1vw;
+      &:disabled {
+        background-color: $white__2;
+      }
+    }
+    &-signOther {
       border: 0;
       background-color: transparent;
       font-size: $text__4;
-      color: $blue__dark;
+      color: $blue__light;
       display: flex;
       flex-direction: column;
+      align-items: center;
       margin-inline: auto;
       &::after {
         content: "";
         width: 0;
         height: 2px;
-        background-color: $blue__light;
+        background-color: $blue__dark;
         transition: width 0.3s ease;
       }
       &:hover {
@@ -51,8 +77,7 @@
   }
 }
 
-
-.error {
+.input__error {
   border: 2px red solid;
   color: red;
 }
