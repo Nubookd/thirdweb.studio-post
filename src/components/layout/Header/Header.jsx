@@ -8,6 +8,7 @@ import appearance from "@/lib/animation/appearance";
 import Login from "../Login";
 
 export default function Header({ children }) {
+  
   return (
     <header className={styles.header}>
       <Logo />
