@@ -1,3 +1,7 @@
-.container {
-  /* Add your styles here */
+@use "../../../styles/variables.scss" as *;
+
+
+.logo {
+  background-color: transparent;
+  color: $white__1;
 }

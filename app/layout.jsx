@@ -1,7 +1,7 @@
+
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import LayoutClient from "./layoutClient";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -12,15 +12,21 @@ const inter = Inter({
 export const metadata = {
   title: "Thirdweb.studio-post",
   description: "Post",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <body className={`${inter.className} antialiased bg-black`}>
-        <Header />
-        {children}
-        <Footer />
+        <LayoutClient>
+          {children}
+        </LayoutClient>
       </body>
     </html>
   );

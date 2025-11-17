@@ -104,7 +104,7 @@ export default function Footer({ children }) {
       >
         <div className={styles["footer__drag-container-up"]}>
           <motion.span
-            {...appearance.getAppearanceScroll(appearance.appearanceRight)}
+            {...appearance.getAppearanceScroll(appearance.appearanceDown)}
             className={styles["footer__drag-container-up-text"]}
           >
             Back to top

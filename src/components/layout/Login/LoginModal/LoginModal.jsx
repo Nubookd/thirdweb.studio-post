@@ -123,10 +123,12 @@ const LoginModal = ({ children }) => {
             }));
           }
         }
+        location.reload()
       } catch (error) {
         alert("GG");
       }
     },
+    
     [userName, userPassword, validateForm, setLogin, closeModal]
   );
 
@@ -176,6 +178,7 @@ const LoginModal = ({ children }) => {
             signUpRef.current.disabled = true;
           }
         }
+        location.reload()
       } catch (error) {
         alert("GG");
       }

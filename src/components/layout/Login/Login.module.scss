@@ -3,4 +3,7 @@
 .login {
   width: 30px;
   aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

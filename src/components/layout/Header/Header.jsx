@@ -6,12 +6,14 @@ import styles from "./Header.module.scss";
 import { motion } from "framer-motion";
 import appearance from "@/lib/animation/appearance";
 import Login from "../Login";
+import Link from "next/link";
 
 export default function Header({ children }) {
-  
   return (
     <header className={styles.header}>
-      <Logo />
+      <Link href="/">
+        <Logo />
+      </Link>
       <nav>
         <ul className={styles.header__navigation}>
           <motion.li

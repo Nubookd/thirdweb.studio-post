@@ -1,1 +1,65 @@
 @use "../../../../styles/variables.scss" as *;
+
+.loginOutModal {
+  position: relative;
+  &__content {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-right: 10px;
+    
+  }
+  &__button {
+    all: unset;
+    cursor: pointer;
+    white-space: nowrap;
+    // border: 1px red solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    font-size: $text__3;
+  }
+  &__close {
+    width: 2vw;
+    aspect-ratio: 1;
+  }
+}
+
+
+
+// -- Таблица пользователей
+// CREATE TABLE users (
+//   id SERIAL PRIMARY KEY,
+//   email VARCHAR(255) UNIQUE NOT NULL,
+//   name VARCHAR(100) NOT NULL,
+//   password_hash VARCHAR(255) NOT NULL,
+//   avatar_url VARCHAR(500),
+//   role VARCHAR(20) DEFAULT 'user',
+//   created_at TIMESTAMP DEFAULT NOW(),
+//   updated_at TIMESTAMP DEFAULT NOW()
+// );
+
+// -- Таблица профилей
+// CREATE TABLE profiles (
+//   id SERIAL PRIMARY KEY,
+//   user_id INTEGER REFERENCES users(id),
+//   bio TEXT,
+//   website VARCHAR(255),
+//   social_links JSONB,
+//   settings JSONB DEFAULT '{}'
+// );
+
+// -- Таблица активностей пользователя
+// CREATE TABLE user_activities (
+//   id SERIAL PRIMARY KEY,
+//   user_id INTEGER REFERENCES users(id),
+//   action VARCHAR(100) NOT NULL,
+//   metadata JSONB,
+//   created_at TIMESTAMP DEFAULT NOW()
+// );

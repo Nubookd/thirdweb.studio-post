@@ -6,21 +6,26 @@ import useModalStore from "@/store/useModalStore";
 import appearance from "@/lib/animation/appearance";
 import useLoginStore from "@/store/useLoginStore";
 import { useState, memo } from "react";
-import LoginOutModal from "./LoginOutModal/LoginOutModal";
+import useLogOutModal from "@/store/useLogOutModalStore";
 
 const Login = () => {
   const login = useLoginStore((state) => state.login);
   const { showLoginModal } = useModalStore();
-  const [showLogOutModal, setShowLogOutModal] = useState(false);
+  const { showLogOutModal, openLogOutModal, closeLogOutModal } =
+    useLogOutModal();
 
-  
+  const handleLogOutModal = () => {
+    {
+      showLogOutModal ? closeLogOutModal() : openLogOutModal();
+    }
+  };
 
   return (
     <>
       {login ? (
         <motion.div
           className={styles.login}
-          onClick={() => setShowLogOutModal(true)}
+          onClick={handleLogOutModal}
           {...appearance.getAppearance(appearance.appearanceUp, 0.8)}
         >
           <svg
@@ -37,9 +42,9 @@ const Login = () => {
               fill="black"
             />
           </svg>
-          {showLogOutModal && (
+          {/* {showLogOutModal && (
             <LoginOutModal onClose={() => setShowLogOutModal(false)} />
-          )}
+          )} */}
         </motion.div>
       ) : (
         <motion.div
@@ -71,5 +76,5 @@ const Login = () => {
       )}
     </>
   );
-}
+};
 export default memo(Login);

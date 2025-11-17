@@ -3,6 +3,7 @@ import styles from "./Logo.module.scss";
 export default function Logo({ children }) {
   return (
     <svg
+    className={styles.logo}
       width="52"
       height="50"
       viewBox="0 0 52 50"

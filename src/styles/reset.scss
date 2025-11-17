@@ -200,6 +200,14 @@ body {
   font-family: $ff-regular;
   line-height: 1.2;
   overflow-x: hidden;
+  width: 100%;
   user-select: none;
   transition: 0.3s;
+  position: relative;
+  overflow-y: scroll;
+
+  & > * {
+    overflow-x: hidden;
+    position: relative;
+  }
 }

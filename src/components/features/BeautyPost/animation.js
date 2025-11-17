@@ -69,7 +69,9 @@ export default class Animation {
       });
     });
     return () => {
-      ctx.revert();
+      if (this.ctx) {
+        this.ctx.revert();
+      }
     };
   };
 }
