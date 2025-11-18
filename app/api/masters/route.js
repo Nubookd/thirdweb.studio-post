@@ -8,16 +8,18 @@ const pool = new Pool({
   password: "post",
 });
 
-export async function GET() {
+export async function GET(request) {
   try {
-    const result = await pool.query("SELECT * FROM users");
-    console.log("Fetched users:", result.rows);
-    return Response.json(result.rows);
+    const res = await pool.query(`SELECT * FROM masters`);
+    return Response.json({
+      success: true,
+      masters: res.rows,
+    });
   } catch (error) {
     console.error("Database error:", error);
     return Response.json(
       {
-        error: "Failed to fetch users",
+        error: "Masters not found",
         details: error.message,
       },
       { status: 500 }

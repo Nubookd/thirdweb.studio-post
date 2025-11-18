@@ -1,31 +1,63 @@
-"use";
+"use client";
 
 import useLoginStore from "@/store/useLoginStore";
 import styles from "./LoginOutModal.module.scss";
-import { memo } from "react";
+import { memo, useCallback, useRef, useEffect } from "react";
 import useLogOutModal from "@/store/useLogOutModalStore";
 import Link from "next/link";
 
 const LoginOutModal = () => {
   const { outLogin } = useLoginStore();
-  const { closeLogOutModal } = useLogOutModal();
+  const { showLogOutModal, closeLogOutModal } = useLogOutModal();
+  const logOutModalRef = useRef();
 
   const handleLogout = () => {
     outLogin();
     closeLogOutModal();
-    location.reload();
+    window.location.href = "/";
+    // location.reload();
   };
 
   const handleCancel = () => {
     closeLogOutModal();
   };
+
+  // const handleOverlayClick = useCallback(
+  //   (e) => {
+  //     if (
+  //       logOutModalRef.current &&
+  //       !logOutModalRef.current.contains(e.target)
+  //     ) {
+  //       closeLogOutModal();
+  //     }
+  //   },
+  //   [closeLogOutModal]
+  // );
+
+  // useEffect(() => {
+  //   if (showLogOutModal) {
+  //     document.addEventListener("mousedown", handleOverlayClick);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleOverlayClick);
+  //   }
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleOverlayClick);
+  //   };
+  // }, [showLogOutModal, handleOverlayClick]);
+
+  if (!showLogOutModal) return null;
   return (
     <div className={styles.loginOutModal} onClick={handleCancel}>
       <div
+        ref={logOutModalRef}
         className={styles.loginOutModal__content}
         onClick={(e) => e.stopPropagation()}
       >
-        <Link href="/profile" className={styles.loginOutModal__button}>
+        <Link
+          href="/profileUser"
+          onClick={handleCancel}
+          className={styles.loginOutModal__button}
+        >
           Сabinet
         </Link>
 

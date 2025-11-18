@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import appearance from "@/lib/animation/appearance";
 import Login from "../Login";
 import Link from "next/link";
+import Navigation from "../Navigation";
 
 export default function Header({ children }) {
   return (
@@ -14,34 +15,7 @@ export default function Header({ children }) {
       <Link href="/">
         <Logo />
       </Link>
-      <nav>
-        <ul className={styles.header__navigation}>
-          <motion.li
-            {...appearance.getAppearance(appearance.appearanceLeft)}
-            className={styles.header__navigation__link}
-          >
-            Home
-          </motion.li>
-          <motion.li
-            {...appearance.getAppearance(appearance.appearanceLeft, 0.2)}
-            className={styles.header__navigation__link}
-          >
-            About
-          </motion.li>
-          <motion.li
-            {...appearance.getAppearance(appearance.appearanceLeft, 0.4)}
-            className={styles.header__navigation__link}
-          >
-            Contact
-          </motion.li>
-          <motion.li
-            {...appearance.getAppearance(appearance.appearanceLeft, 0.6)}
-            className={styles.header__navigation__link}
-          >
-            Career
-          </motion.li>
-        </ul>
-      </nav>
+      <Navigation />
       <div>
         <Login />
         <div className={styles.header__menu}>

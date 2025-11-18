@@ -1,0 +1,51 @@
+@use "@/styles/variables.scss" as *;
+
+.masters {
+  margin-top: 80px;
+  min-height: 100vh;
+
+  &__title {
+    font-size: $text__1;
+    text-align: center;
+  }
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vw;
+    padding: 2vw;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1vw;
+    background-color: $white__3;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 130px;
+    span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      color: $white__2;
+      font-size: $text__3;
+      transition: all 0.5s ease;
+      &:hover {
+        color: $white__1;
+      }
+    }
+    &:hover {
+      background-color: $white__2;
+      transform: scale(1.05);
+      span {
+        text-overflow: clip;
+        white-space: normal;
+        overflow: auto;
+        word-break: break-all;
+        transition: all 0.3s ease;
+        
+      }
+    }
+  }
+}

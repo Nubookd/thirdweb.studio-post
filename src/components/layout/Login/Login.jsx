@@ -10,13 +10,18 @@ import useLogOutModal from "@/store/useLogOutModalStore";
 
 const Login = () => {
   const login = useLoginStore((state) => state.login);
-  const { showLoginModal } = useModalStore();
+  const { showModal, showLoginModal, closeModal } = useModalStore();
   const { showLogOutModal, openLogOutModal, closeLogOutModal } =
     useLogOutModal();
 
   const handleLogOutModal = () => {
     {
       showLogOutModal ? closeLogOutModal() : openLogOutModal();
+    }
+  };
+  const handleLogModal = () => {
+    {
+      showModal ? closeModal() : showLoginModal();
     }
   };
 
@@ -49,7 +54,7 @@ const Login = () => {
       ) : (
         <motion.div
           className={styles.login}
-          onClick={showLoginModal}
+          onClick={handleLogModal}
           {...appearance.getAppearance(appearance.appearanceUp, 0.8)}
         >
           <svg

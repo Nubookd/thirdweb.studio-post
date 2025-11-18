@@ -1,4 +1,6 @@
-import { memo, useCallback, useRef, useState } from "react";
+"use client";
+
+import { memo, useCallback, useRef, useState, useEffect } from "react";
 import styles from "./LoginModal.module.scss";
 import useModalStore from "@/store/useModalStore";
 import useLoginStore from "@/store/useLoginStore";
@@ -13,6 +15,38 @@ const LoginModal = ({ children }) => {
   const { setLogin } = useLoginStore();
   const signUpRef = useRef();
   const signInRef = useRef();
+  const modalRef = useRef();
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add(styles.bodyBlur);
+    } else {
+      document.body.classList.remove(styles.bodyBlur);
+    }
+    return () => {
+      document.body.classList.remove(styles.bodyBlur);
+    };
+  }, [showModal]);
+
+  const handleOverlayClick = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) {
+        closeModal();
+      }
+    },
+    [closeModal]
+  );
+
+  useEffect(() => {
+    if (showModal) {
+      document.addEventListener("mousedown", handleOverlayClick);
+    } else {
+      document.removeEventListener("mousedown", handleOverlayClick);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleOverlayClick);
+    };
+  }, [showModal, handleOverlayClick]);
 
   const handleModalSwitch = useCallback(
     (modal) => {
@@ -109,6 +143,7 @@ const LoginModal = ({ children }) => {
           setUserName("");
           setLogin(data.user);
           closeModal();
+          location.reload();
         } else {
           if (data.name?.[0]?.exists === false) {
             setErrors((prev) => ({
@@ -123,12 +158,11 @@ const LoginModal = ({ children }) => {
             }));
           }
         }
-        location.reload()
       } catch (error) {
         alert("GG");
       }
     },
-    
+
     [userName, userPassword, validateForm, setLogin, closeModal]
   );
 
@@ -163,6 +197,7 @@ const LoginModal = ({ children }) => {
           setUserName("");
           setLogin(data.user);
           closeModal();
+          location.reload();
         } else {
           if (data.name?.[0]?.exists) {
             setErrors((prev) => ({ ...prev, userName: "Имя уже занято" }));
@@ -178,148 +213,154 @@ const LoginModal = ({ children }) => {
             signUpRef.current.disabled = true;
           }
         }
-        location.reload()
       } catch (error) {
         alert("GG");
       }
     },
     [userName, userEmail, userPassword, validateForm, setLogin, closeModal]
   );
+  if (!showModal) return null;
   return (
-    <div className={styles.loginModal}>
-      {showModal === "login" && (
-        <form className={styles.loginModal__form} onSubmit={handleSignIn}>
-          <label>Sign in</label>
-          {errors.userTotal && (
-            <span className={styles["loginModal__form-inputSpan"]}>
-              {errors.userTotal}
-            </span>
-          )}
-          <div className={styles["loginModal__form-inputInner"]}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={userName}
-              onChange={(e) => handleInputChange("userName", e.target.value)}
-              className={
-                errors.userName
-                  ? `${styles["loginModal__form-input"]} ${styles.input__error}`
-                  : styles["loginModal__form-input"]
-              }
-            />
-            {errors.userName && (
+    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+      <div
+        className={styles.loginModal}
+        ref={modalRef}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {showModal === "login" && (
+          <form className={styles.loginModal__form} onSubmit={handleSignIn}>
+            <label>Sign in</label>
+            {errors.userTotal && (
               <span className={styles["loginModal__form-inputSpan"]}>
-                {errors.userName}
+                {errors.userTotal}
               </span>
             )}
-          </div>
-          <div className={styles["loginModal__form-inputInner"]}>
-            <input
-              type="password"
-              placeholder="Password"
-              value={userPassword}
-              onChange={(e) =>
-                handleInputChange("userPassword", e.target.value)
-              }
-              className={
-                errors.userPassword
-                  ? `${styles["loginModal__form-input"]} ${styles.input__error}`
-                  : styles["loginModal__form-input"]
-              }
-            />
-            {errors.userPassword && (
-              <span className={styles["loginModal__form-inputSpan"]}>
-                {errors.userPassword}
-              </span>
-            )}
-          </div>
-          <button
-            ref={signInRef}
-            className={styles["loginModal__form-signNow"]}
-          >
-            Sign In
-          </button>
-          <button
-            className={styles["loginModal__form-signOther"]}
-            onClick={() => handleModalSwitch("register")}
-          >
-            Sign Up
-          </button>
-        </form>
-      )}
-      {showModal === "register" && (
-        <form className={styles.loginModal__form} onSubmit={handleSignUp}>
-          <label>Sign up</label>
-          <div className={styles["loginModal__form-inputInner"]}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={userName}
-              onChange={(e) => handleInputChange("userName", e.target.value)}
-              className={
-                errors.userName
-                  ? `${styles["loginModal__form-input"]} ${styles.input__error}`
-                  : styles["loginModal__form-input"]
-              }
-            />
-            {errors.userName && (
-              <span className={styles["loginModal__form-inputSpan"]}>
-                {errors.userName}
-              </span>
-            )}
-          </div>
-          <div className={styles["loginModal__form-inputInner"]}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={userEmail}
-              onChange={(e) => handleInputChange("userEmail", e.target.value)}
-              className={
-                errors.userEmail
-                  ? `${styles["loginModal__form-input"]} ${styles.input__error}`
-                  : styles["loginModal__form-input"]
-              }
-            />
-            {errors.userEmail && (
-              <span className={styles["loginModal__form-inputSpan"]}>
-                {errors.userEmail}
-              </span>
-            )}
-          </div>
-          <div className={styles["loginModal__form-inputInner"]}>
-            <input
-              type="password"
-              placeholder="Password"
-              value={userPassword}
-              onChange={(e) =>
-                handleInputChange("userPassword", e.target.value)
-              }
-              className={
-                errors.userPassword
-                  ? `${styles["loginModal__form-input"]} ${styles.input__error}`
-                  : styles["loginModal__form-input"]
-              }
-            />
-            {errors.userPassword && (
-              <span className={styles["loginModal__form-inputSpan"]}>
-                {errors.userPassword}
-              </span>
-            )}
-          </div>
-          <button
-            ref={signUpRef}
-            className={styles["loginModal__form-signNow"]}
-          >
-            Sign Up
-          </button>
-          <button
-            className={styles["loginModal__form-signOther"]}
-            onClick={() => handleModalSwitch("login")}
-          >
-            Sign In
-          </button>
-        </form>
-      )}
+            <div className={styles["loginModal__form-inputInner"]}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={userName}
+                onChange={(e) => handleInputChange("userName", e.target.value)}
+                className={
+                  errors.userName
+                    ? `${styles["loginModal__form-input"]} ${styles.input__error}`
+                    : styles["loginModal__form-input"]
+                }
+              />
+              {errors.userName && (
+                <span className={styles["loginModal__form-inputSpan"]}>
+                  {errors.userName}
+                </span>
+              )}
+            </div>
+            <div className={styles["loginModal__form-inputInner"]}>
+              <input
+                type="password"
+                placeholder="Password"
+                value={userPassword}
+                onChange={(e) =>
+                  handleInputChange("userPassword", e.target.value)
+                }
+                className={
+                  errors.userPassword
+                    ? `${styles["loginModal__form-input"]} ${styles.input__error}`
+                    : styles["loginModal__form-input"]
+                }
+              />
+              {errors.userPassword && (
+                <span className={styles["loginModal__form-inputSpan"]}>
+                  {errors.userPassword}
+                </span>
+              )}
+            </div>
+            <button
+              ref={signInRef}
+              className={styles["loginModal__form-signNow"]}
+            >
+              Sign In
+            </button>
+            <button
+              className={styles["loginModal__form-signOther"]}
+              onClick={() => handleModalSwitch("register")}
+            >
+              Sign Up
+            </button>
+          </form>
+        )}
+        {showModal === "register" && (
+          <form className={styles.loginModal__form} onSubmit={handleSignUp}>
+            <label>Sign up</label>
+            <div className={styles["loginModal__form-inputInner"]}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={userName}
+                onChange={(e) => handleInputChange("userName", e.target.value)}
+                className={
+                  errors.userName
+                    ? `${styles["loginModal__form-input"]} ${styles.input__error}`
+                    : styles["loginModal__form-input"]
+                }
+              />
+              {errors.userName && (
+                <span className={styles["loginModal__form-inputSpan"]}>
+                  {errors.userName}
+                </span>
+              )}
+            </div>
+            <div className={styles["loginModal__form-inputInner"]}>
+              <input
+                type="email"
+                placeholder="Email"
+                value={userEmail}
+                onChange={(e) => handleInputChange("userEmail", e.target.value)}
+                className={
+                  errors.userEmail
+                    ? `${styles["loginModal__form-input"]} ${styles.input__error}`
+                    : styles["loginModal__form-input"]
+                }
+              />
+              {errors.userEmail && (
+                <span className={styles["loginModal__form-inputSpan"]}>
+                  {errors.userEmail}
+                </span>
+              )}
+            </div>
+            <div className={styles["loginModal__form-inputInner"]}>
+              <input
+                type="password"
+                placeholder="Password"
+                value={userPassword}
+                onChange={(e) =>
+                  handleInputChange("userPassword", e.target.value)
+                }
+                className={
+                  errors.userPassword
+                    ? `${styles["loginModal__form-input"]} ${styles.input__error}`
+                    : styles["loginModal__form-input"]
+                }
+              />
+              {errors.userPassword && (
+                <span className={styles["loginModal__form-inputSpan"]}>
+                  {errors.userPassword}
+                </span>
+              )}
+            </div>
+            <button
+              ref={signUpRef}
+              className={styles["loginModal__form-signNow"]}
+            >
+              Sign Up
+            </button>
+            <button
+              className={styles["loginModal__form-signOther"]}
+              onClick={() => handleModalSwitch("login")}
+            >
+              Sign In
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

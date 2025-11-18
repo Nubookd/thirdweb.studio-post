@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const useLogOutModal = create((set, get) => ({
+const useLogOutModal = create((set) => ({
   showLogOutModal: false,
   openLogOutModal: () => {
     set({ showLogOutModal: true });
