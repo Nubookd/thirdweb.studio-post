@@ -1,18 +1,19 @@
 "use client";
 
-import useLoginStore from "@/store/useLoginStore";
 import styles from "./LoginOutModal.module.scss";
-import { memo, useCallback, useRef, useEffect } from "react";
+import { memo, useRef } from "react";
 import useLogOutModal from "@/store/useLogOutModalStore";
 import Link from "next/link";
+import useAuth  from "@/hooks/useAuth";
 
 const LoginOutModal = () => {
-  const { outLogin } = useLoginStore();
   const { showLogOutModal, closeLogOutModal } = useLogOutModal();
   const logOutModalRef = useRef();
 
-  const handleLogout = () => {
-    outLogin();
+  const { user, loading, login, register, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
     closeLogOutModal();
     window.location.href = "/";
     // location.reload();
@@ -21,29 +22,6 @@ const LoginOutModal = () => {
   const handleCancel = () => {
     closeLogOutModal();
   };
-
-  // const handleOverlayClick = useCallback(
-  //   (e) => {
-  //     if (
-  //       logOutModalRef.current &&
-  //       !logOutModalRef.current.contains(e.target)
-  //     ) {
-  //       closeLogOutModal();
-  //     }
-  //   },
-  //   [closeLogOutModal]
-  // );
-
-  // useEffect(() => {
-  //   if (showLogOutModal) {
-  //     document.addEventListener("mousedown", handleOverlayClick);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleOverlayClick);
-  //   }
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleOverlayClick);
-  //   };
-  // }, [showLogOutModal, handleOverlayClick]);
 
   if (!showLogOutModal) return null;
   return (

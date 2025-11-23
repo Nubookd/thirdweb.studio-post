@@ -5,14 +5,23 @@ import styles from "./Login.module.scss";
 import useModalStore from "@/store/useModalStore";
 import appearance from "@/lib/animation/appearance";
 import useLoginStore from "@/store/useLoginStore";
-import { useState, memo } from "react";
+import { memo, useEffect, useState } from "react";
 import useLogOutModal from "@/store/useLogOutModalStore";
 
 const Login = () => {
-  const login = useLoginStore((state) => state.login);
+  // const login = useLoginStore((state) => state.login);
   const { showModal, showLoginModal, closeModal } = useModalStore();
   const { showLogOutModal, openLogOutModal, closeLogOutModal } =
     useLogOutModal();
+  const { isLogin } = useLoginStore();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const mounted = async () => {
+      setIsMounted(true);
+    };
+    mounted();
+  }, []);
 
   const handleLogOutModal = () => {
     {
@@ -24,10 +33,12 @@ const Login = () => {
       showModal ? closeModal() : showLoginModal();
     }
   };
-
+  if (!isMounted) {
+    return <div className={styles.login}></div>;
+  }
   return (
     <>
-      {login ? (
+      {isLogin ? (
         <motion.div
           className={styles.login}
           onClick={handleLogOutModal}

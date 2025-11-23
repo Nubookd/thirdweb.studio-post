@@ -3,7 +3,8 @@
 import { memo, useCallback, useRef, useState, useEffect } from "react";
 import styles from "./LoginModal.module.scss";
 import useModalStore from "@/store/useModalStore";
-import useLoginStore from "@/store/useLoginStore";
+// import useLoginStore from "@/store/useLoginStore";
+import useAuth from "@/hooks/useAuth";
 
 const LoginModal = ({ children }) => {
   const [userName, setUserName] = useState("");
@@ -12,10 +13,11 @@ const LoginModal = ({ children }) => {
   const [errors, setErrors] = useState({});
   const { showModal, showLoginModal, showRegisterModal, closeModal } =
     useModalStore();
-  const { setLogin } = useLoginStore();
   const signUpRef = useRef();
   const signInRef = useRef();
   const modalRef = useRef();
+
+  const { user, loading, login, register, logout } = useAuth();
 
   useEffect(() => {
     if (showModal) {
@@ -26,7 +28,7 @@ const LoginModal = ({ children }) => {
     return () => {
       document.body.classList.remove(styles.bodyBlur);
     };
-  }, [showModal]);
+  }, [showModal, closeModal]);
 
   const handleOverlayClick = useCallback(
     (e) => {
@@ -114,111 +116,100 @@ const LoginModal = ({ children }) => {
     }
   };
 
-  const handleSignIn = useCallback(
-    async (event) => {
-      event.preventDefault();
+  const handleSignIn = async (event) => {
+    event.preventDefault();
 
-      if (!validateForm()) {
-        return;
-      }
+    if (!validateForm()) {
+      return;
+    }
 
-      try {
-        const res = await fetch("/api/signIn", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: userName,
-            password: userPassword,
-          }),
-        });
-        const data = await res.json();
+    try {
+      const result = await login(userName, userPassword);
 
-        console.log(data);
-
-        if (data.exactMatch && data.success) {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("isLogin", "true");
-
-          setUserPassword("");
-          setUserName("");
-          setLogin(data.user);
-          closeModal();
-          location.reload();
-        } else {
-          if (data.name?.[0]?.exists === false) {
-            setErrors((prev) => ({
-              ...prev,
-              userName: "Имя не зарегистрировано",
-            }));
-            signInRef.current.disabled = true;
-          } else if (!data.exactMatch) {
-            setErrors((prev) => ({
-              ...prev,
-              userTotal: "Пароль неверный",
-            }));
-          }
-        }
-      } catch (error) {
-        alert("GG");
-      }
-    },
-
-    [userName, userPassword, validateForm, setLogin, closeModal]
-  );
-
-  const handleSignUp = useCallback(
-    async (event) => {
-      event.preventDefault();
-
-      if (!validateForm()) {
-        return;
-      }
-
-      try {
-        const res = await fetch("/api/signUp", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: userName,
-            email: userEmail,
-            password: userPassword,
-          }),
-        });
-        const data = await res.json();
-
-        console.log(data);
-
-        if (data.user && data.success) {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("isLogin", "true");
-
-          setUserEmail("");
-          setUserPassword("");
-          setUserName("");
-          setLogin(data.user);
-          closeModal();
-          location.reload();
-        } else {
-          if (data.name?.[0]?.exists) {
-            setErrors((prev) => ({ ...prev, userName: "Имя уже занято" }));
-            signUpRef.current.disabled = true;
-            console.log("name");
-          }
-          if (data.email?.[0]?.exists) {
+      if (result.success) {
+        setUserPassword("");
+        setUserName("");
+        closeModal();
+        // location.reload();
+      } else {
+        if (
+          result.error.includes("already exists") ||
+          result.error.includes("уже существует")
+        ) {
+          if (result.error.includes("email")) {
             setErrors((prev) => ({
               ...prev,
               userEmail: "Email уже занят",
             }));
-            console.log("email");
-            signUpRef.current.disabled = true;
+          } else {
+            setErrors((prev) => ({
+              ...prev,
+              userName: "Имя уже занято",
+            }));
           }
+          signUpRef.current.disabled = true;
+        } else {
+          setErrors((prev) => ({
+            ...prev,
+            userTotal: result.error,
+          }));
         }
-      } catch (error) {
-        alert("GG");
       }
-    },
-    [userName, userEmail, userPassword, validateForm, setLogin, closeModal]
-  );
+    } catch (error) {
+      setErrors((prev) => ({
+        ...prev,
+        userTotal: "Ошибка сети",
+      }));
+    }
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      const result = await register(userEmail, userName, userPassword);
+
+      if (result.success) {
+        setUserEmail("");
+        setUserPassword("");
+        setUserName("");
+        closeModal();
+        // location.reload();
+      } else {
+        if (
+          result.error.includes("already exists") ||
+          result.error.includes("уже существует")
+        ) {
+          if (result.error.includes("email")) {
+            setErrors((prev) => ({
+              ...prev,
+              userEmail: "Email уже занят",
+            }));
+          } else {
+            setErrors((prev) => ({
+              ...prev,
+              userName: "Имя уже занято",
+            }));
+          }
+          signUpRef.current.disabled = true;
+        } else {
+          setErrors((prev) => ({
+            ...prev,
+            userTotal: result.error,
+          }));
+        }
+      }
+    } catch (error) {
+      setErrors((prev) => ({
+        ...prev,
+        userTotal: "Ошибка сети",
+      }));
+    }
+  };
   if (!showModal) return null;
   return (
     <div className={styles.modalOverlay} onClick={handleOverlayClick}>

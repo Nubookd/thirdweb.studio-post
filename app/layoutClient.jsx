@@ -11,12 +11,8 @@ import useModalStore from "@/store/useModalStore";
 import useLogOutModal from "@/store/useLogOutModalStore";
 
 export default function LayoutClient({ children }) {
-  const initLogin = useLoginStore((state) => state.initLogin);
   const { showModal } = useModalStore();
   const { showLogOutModal } = useLogOutModal();
-  useEffect(() => {
-    initLogin();
-  }, [initLogin]);
 
   return (
     <>
