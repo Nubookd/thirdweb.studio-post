@@ -1,7 +1,6 @@
 import UserModel from "@/lib/userModel";
 import jwt from "@/lib/jwt";
 
-
 export async function POST(request) {
   try {
     const { email, name, password } = await request.json();
@@ -15,9 +14,11 @@ export async function POST(request) {
 
     const existingUserName = await UserModel.findUserByName(name);
     const existingUserEmail = await UserModel.findUserByEmail(email);
-    if (existingUserName || existingUserEmail) {
+    if (existingUserName) {
+      return Response.json({ message: "Имя уже занято" }, { status: 400 });
+    } else if (existingUserEmail) {
       return Response.json(
-        { message: "Пользователь уже существует" },
+        { message: "Email уже зарегистрирован" },
         { status: 400 }
       );
     }
@@ -25,13 +26,13 @@ export async function POST(request) {
     const user = await UserModel.createUser(name, email, password);
 
     const accessToken = jwt.generateAccessToken({
-      userId: user.user_id,
+      user_id: user.user_id,
       name: user.user_name,
       email: user.user_email,
     });
 
     const refreshToken = jwt.generateRefreshToken({
-      userId: user.user_id,
+      user_id: user.user_id,
       name: user.user_name,
       email: user.user_email,
     });

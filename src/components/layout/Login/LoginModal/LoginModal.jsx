@@ -18,7 +18,6 @@ const LoginModal = ({ children }) => {
   const modalRef = useRef();
 
   const { user, loading, login, register, logout } = useAuth();
-
   useEffect(() => {
     if (showModal) {
       document.body.classList.add(styles.bodyBlur);
@@ -125,33 +124,27 @@ const LoginModal = ({ children }) => {
 
     try {
       const result = await login(userName, userPassword);
-
+      console.log(user)
       if (result.success) {
         setUserPassword("");
         setUserName("");
         closeModal();
         // location.reload();
       } else {
-        if (
-          result.error.includes("already exists") ||
-          result.error.includes("уже существует")
-        ) {
-          if (result.error.includes("email")) {
-            setErrors((prev) => ({
-              ...prev,
-              userEmail: "Email уже занят",
-            }));
-          } else {
-            setErrors((prev) => ({
-              ...prev,
-              userName: "Имя уже занято",
-            }));
-          }
-          signUpRef.current.disabled = true;
+        if (result.error.includes("Неверный пароль")) {
+          setErrors((prev) => ({
+            ...prev,
+            userPassword: "Неверный пароль",
+          }));
+        } else if (result.error.includes("Пользователь не найден")) {
+          setErrors((prev) => ({
+            ...prev,
+            userTotal: "Пользователь не найден",
+          }));
         } else {
           setErrors((prev) => ({
             ...prev,
-            userTotal: result.error,
+            userTotal: "Ошибка сети",
           }));
         }
       }
@@ -180,26 +173,20 @@ const LoginModal = ({ children }) => {
         closeModal();
         // location.reload();
       } else {
-        if (
-          result.error.includes("already exists") ||
-          result.error.includes("уже существует")
-        ) {
-          if (result.error.includes("email")) {
-            setErrors((prev) => ({
-              ...prev,
-              userEmail: "Email уже занят",
-            }));
-          } else {
-            setErrors((prev) => ({
-              ...prev,
-              userName: "Имя уже занято",
-            }));
-          }
-          signUpRef.current.disabled = true;
+        if (result.error.includes("Имя уже занято")) {
+          setErrors((prev) => ({
+            ...prev,
+            userName: "Имя уже занято",
+          }));
+        } else if (result.error.includes("Email уже зарегистрирован")) {
+          setErrors((prev) => ({
+            ...prev,
+            userEmail: "Email уже зарегистрирован",
+          }));
         } else {
           setErrors((prev) => ({
             ...prev,
-            userTotal: result.error,
+            userTotal: "Ошибка сети",
           }));
         }
       }

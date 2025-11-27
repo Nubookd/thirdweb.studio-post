@@ -1,10 +1,7 @@
-// // next.config.mjs
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   experimental: {
-//     appDir: true,
-//   },
-//   // ваши настройки...
-// };
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Ваши настройки здесь
+  reactStrictMode: true,
+};
 
-// export default nextConfig;
+export default nextConfig;

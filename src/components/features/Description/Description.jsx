@@ -70,7 +70,7 @@ export default function Description() {
           What is Web3 studio?
         </motion.h2>
         <motion.div
-        {...appearance.getAppearanceScroll(appearance.appearanceDown)}
+          {...appearance.getAppearanceScroll(appearance.appearanceDown)}
           className={styles.description__text}
         >
           Things around crypto, NFTs and web3 as a whole are unbelievably

@@ -49,14 +49,14 @@
   column-gap: 20px;
 }
 
-.running_line-span::before {
-  content: "";
-  background: url(/icons/runing__line-icon) center / contain no-repeat;
-  color: $white__1;
-  width: 35px;
-  aspect-ratio: 1;
-  display: flex;
-}
+// .running_line-span::before {
+//   content: "";
+//   background: url(/icons/runing__line-icon) center / contain no-repeat;
+//   color: $white__1;
+//   width: 35px;
+//   aspect-ratio: 1;
+//   display: flex;
+// }
 
 @keyframes scroll {
   from {

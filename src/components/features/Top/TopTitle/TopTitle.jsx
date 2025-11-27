@@ -5,9 +5,7 @@ import appearance from "@/lib/animation/appearance";
 export default function TopTitle({ children }) {
   return (
     <div className={styles.top__title}>
-      <motion.h1
-        {...appearance.getAppearance(appearance.appearanceUp, 0.2)}
-      >
+      <motion.h1 {...appearance.getAppearance(appearance.appearanceUp, 0.2)}>
         Design studio
       </motion.h1>
       <motion.span

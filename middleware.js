@@ -14,7 +14,7 @@ export default function middleware(request) {
     const decoded = jwtUtils.verifyAccessToken(token);
 
     const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-user-id", decoded.userId.toString());
+    requestHeaders.set("x-user-id", decoded.user_id.toString());
     requestHeaders.set("x-user-email", decoded.email);
 
     return NextResponse.next({

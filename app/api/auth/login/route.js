@@ -1,7 +1,6 @@
 import UserModel from "@/lib/userModel";
 import jwt from "@/lib/jwt";
 
-
 export async function POST(request) {
   try {
     const { name, password } = await request.json();
@@ -30,13 +29,13 @@ export async function POST(request) {
     }
 
     const accessToken = jwt.generateAccessToken({
-      userId: user.user_id,
+      user_id: user.user_id,
       name: user.user_name,
       email: user.user_email,
     });
 
     const refreshToken = jwt.generateRefreshToken({
-      userId: user.user_id,
+      user_id: user.user_id,
       name: user.user_name,
       email: user.user_email,
     });

@@ -13,7 +13,11 @@ import useLogOutModal from "@/store/useLogOutModalStore";
 export default function LayoutClient({ children }) {
   const { showModal } = useModalStore();
   const { showLogOutModal } = useLogOutModal();
+  const { initAuthStorage, loading } = useLoginStore();
 
+  useEffect(() => {
+    initAuthStorage();
+  }, []);
   return (
     <>
       <Header />

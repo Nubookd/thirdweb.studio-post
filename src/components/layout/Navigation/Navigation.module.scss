@@ -11,6 +11,7 @@
       all: unset;
       position: relative;
       padding-bottom: 0.347vw;
+      cursor: pointer;
       &::before {
         content: "";
         position: absolute;

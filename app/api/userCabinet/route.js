@@ -1,7 +1,8 @@
-import UserModel from "@/lib/userModel";
 import jwt from "@/lib/jwt";
 
-export async function GET(request) {
+// export const runtime = "nodejs";
+
+export async function POST(request) {
   try {
     const authHeader = request.headers.get("authorization");
 
@@ -16,16 +17,16 @@ export async function GET(request) {
     let decoded;
     try {
       decoded = jwt.verifyAccessToken(token);
-      console.log("Token decoded successfully:", { userId: decoded.userId });
+      console.log("Token decoded successfully:", { user_id: decoded.user_id });
     } catch (tokenError) {
       console.error("Token verification failed:", tokenError.message);
       return Response.json({ message: "Невалидный токен" }, { status: 401 });
     }
 
-    const user = await UserModel.findUserById(decoded.userId);
+    const user = await UserModel.findUserById(decoded.user_id);
 
     if (!user) {
-      console.error("User not found for ID:", decoded.userId);
+      console.error("User not found for ID:", decoded.user_id);
       return Response.json(
         { message: "Пользователь не найден" },
         { status: 404 }

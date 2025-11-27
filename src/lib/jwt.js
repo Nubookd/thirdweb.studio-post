@@ -4,8 +4,12 @@ import UserModel from "./userModel";
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
+if (!JWT_SECRET || !JWT_REFRESH_SECRET) {
+  throw new Error("JWT_SECRET or JWT_REFRESH_SECRET environment variables are not set");
+}
+
 const generateAccessToken = (payload) => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "1s" });
 };
 
 const generateRefreshToken = (payload) => {
@@ -22,35 +26,36 @@ const verifyRefreshToken = (token) => {
 
 const refreshTokens = async (refreshToken) => {
   const decoded = verifyRefreshToken(refreshToken);
+  console.log(decoded)
 
   const storedToken = await UserModel.findRefreshToken(refreshToken);
   if (!storedToken) {
     throw new Error("Invalid refresh token");
   }
 
-  const user = await UserModel.findUserById(decoded.userId);
+  const user = await UserModel.findUserById(decoded.user_id);
   if (!user) {
     throw new Error("User not found");
   }
 
   const newAccessToken = generateAccessToken({
-    userId: user.user_id,
+    user_id: user.user_id,
     name: user.user_name,
     email: user.user_email,
   });
 
   const newRefreshToken = generateRefreshToken({
-    userId: user.user_id,
+    user_id: user.user_id,
     name: user.user_name,
     email: user.user_email,
   });
 
-  await UserModel.deleteRefreshToken(refreshToken);
-
   const expiresAt = new Date();
   expiresAt.setDate(expiresAt.getDate() + 7);
 
-  await UserModel.saveRefreshToken(user.user_id, newRefreshToken, expiresAt);
+  await UserModel.updateRefreshToken(refreshToken, newRefreshToken, expiresAt);
+
+  // await UserModel.saveRefreshToken(user.user_id, newRefreshToken, expiresAt);
 
   return {
     accessToken: newAccessToken,

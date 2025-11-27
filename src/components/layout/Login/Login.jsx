@@ -13,15 +13,7 @@ const Login = () => {
   const { showModal, showLoginModal, closeModal } = useModalStore();
   const { showLogOutModal, openLogOutModal, closeLogOutModal } =
     useLogOutModal();
-  const { isLogin } = useLoginStore();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    const mounted = async () => {
-      setIsMounted(true);
-    };
-    mounted();
-  }, []);
+  const { isLogin, loading } = useLoginStore();
 
   const handleLogOutModal = () => {
     {
@@ -33,7 +25,7 @@ const Login = () => {
       showModal ? closeModal() : showLoginModal();
     }
   };
-  if (!isMounted) {
+  if (loading) {
     return <div className={styles.login}></div>;
   }
   return (

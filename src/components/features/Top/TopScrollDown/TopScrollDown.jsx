@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./TopScrollDown.module.scss";
 import { motion } from "framer-motion";

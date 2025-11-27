@@ -1,29 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import styles from "./profile.module.scss";
+import { useEffect, useState } from "react";
 
-export default function Profile({ children }) {
+export default function Profile() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    try {
-      const userStorage = localStorage.getItem("user");
-      setTimeout(() => {
-        const userData = JSON.parse(userStorage);
-        setUser(userData);
-      }, 0);
-      if (userStorage) {
-      }
-    } catch (error) {
-      console.log("error: ", error);
-    }
+    const auth = async () => {
+      const token = localStorage.getItem("accessToken");
+      try {
+        const res = await fetch("/api/profile", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await res.json();
+        // console.log(data);
+        if (res.ok) {
+          setUser(data.user);
+        } else {
+          setUser("not found");
+        }
+      } catch (error) {}
+    };
+    auth();
   }, []);
 
-  // const userStorage = localStorage.getItem("user")
-  // const user = JSON.parse(userStorage);
-  // console.log(user);
-  if (!user) {
+  if (user === null) {
+    return (
+      <main className={styles.user}>
+        <div className={styles.user__title}>Loading. . .</div>
+      </main>
+    );
+  } else if (user === "not found") {
     return (
       <main className={styles.user}>
         <div className={styles.user__title}>User not found</div>
@@ -34,9 +46,9 @@ export default function Profile({ children }) {
     <main className={styles.user}>
       <div className={styles.user__title}>User Profile</div>
       <div className={styles.user__inner}>
-        <span>id: {user.user_id}</span>
-        <span>Name: {user.user_name}</span>
-        <span>Email: {user.user_email}</span>
+        <span>id: {user.id}</span>
+        <span>Name: {user.name}</span>
+        <span>Email: {user.email}</span>
       </div>
     </main>
   );

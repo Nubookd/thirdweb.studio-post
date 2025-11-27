@@ -39,16 +39,15 @@ export default class User {
       throw error;
     }
   }
-  
+
   static async findUserByName(name) {
     try {
       if (!name) {
         throw new Error("Не указан name");
       }
-      const res = await pool.query(
-        "SELECT * FROM users WHERE user_name = $1",
-        [name]
-      );
+      const res = await pool.query("SELECT * FROM users WHERE user_name = $1", [
+        name,
+      ]);
       return res.rows[0] || null;
     } catch (error) {
       console.error("Ошибка поиска по name", error);
@@ -83,11 +82,11 @@ export default class User {
     }
   }
 
-  static async saveRefreshToken(userId, token, expiresAt) {
+  static async saveRefreshToken(user_id, token, expiresAt) {
     try {
       await pool.query(
         "INSERT INTO refresh_tokens (user_id, token, expires_at) VALUES ($1, $2, $3) RETURNING id",
-        [userId, token, expiresAt]
+        [user_id, token, expiresAt]
       );
     } catch (error) {
       console.error("Ошибка сохранения токена", error);
@@ -119,6 +118,31 @@ export default class User {
       await pool.query("DELETE FROM refresh_tokens WHERE token = $1", [token]);
     } catch (error) {
       console.error("Ошибка удаления токена", error);
+      throw error;
+    }
+  }
+
+  static async updateRefreshToken(oldToken, newToken, expiresAt) {
+    try {
+      console.log("🔄 Updating refresh token...");
+      console.log("Old token:", oldToken.substring(0, 20) + "...");
+      console.log("New token:", newToken.substring(0, 20) + "...");
+
+      const res = await pool.query(
+        `UPDATE refresh_tokens 
+        SET token = $1, expires_at = $2 
+        WHERE token = $3 
+        RETURNING id`,
+        [newToken, expiresAt, oldToken]
+      );
+
+      console.log(
+        "Update result:",
+        res.rows[0] ? "success" : "no rows updated"
+      );
+      return res.rows[0];
+    } catch (error) {
+      console.error("Error updating refresh token:", error);
       throw error;
     }
   }

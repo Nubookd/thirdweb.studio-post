@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import appearance from "@/lib/animation/appearance";
 import Link from "next/link";
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 export default function Navigation() {
   return (
