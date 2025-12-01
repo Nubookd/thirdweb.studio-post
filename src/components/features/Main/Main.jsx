@@ -11,7 +11,7 @@ import Projects from "../Projects";
 import Top from "../Top";
 import styles from "./Main.module.scss";
 
-export default function Main({ children }) {
+export default function Main() {
   return (
     <main className={styles.main}>
       {/* <HalloweenMusic /> */}

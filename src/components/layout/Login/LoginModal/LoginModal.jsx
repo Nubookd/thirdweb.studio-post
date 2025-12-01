@@ -124,7 +124,6 @@ const LoginModal = ({ children }) => {
 
     try {
       const result = await login(userName, userPassword);
-      console.log(user)
       if (result.success) {
         setUserPassword("");
         setUserName("");

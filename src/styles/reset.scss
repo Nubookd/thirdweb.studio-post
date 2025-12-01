@@ -193,6 +193,10 @@ svg * {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 //
 body {
   background: $black;
@@ -209,5 +213,6 @@ body {
   & > * {
     overflow-x: hidden;
     position: relative;
+    line-height: 1.4;
   }
 }

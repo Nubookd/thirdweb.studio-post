@@ -1,0 +1,90 @@
+@use "@/styles/variables.scss" as *;
+
+.master {
+  min-height: 100vh;
+  padding-inline: 5vw;
+  &__top {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 3vw;
+    &-title {
+      font-size: $text__1;
+      font-family: $ff-light;
+    }
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: $text__3;
+      font-family: $ff-regular;
+    }
+  }
+
+  &__comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    gap: 2vw;
+    &-title {
+      font-size: $text__1;
+      font-family: $ff-light;
+    }
+    &-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2vw;
+      width: 100%;
+      padding-block: 50px;
+      .master__comment {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 300px;
+        margin: auto;
+        padding: 5px;
+        border-radius: 20px;
+        gap: 10px;
+        max-width: 500px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: $text__3;
+        background: $white__3;
+        color: $white__2;
+        transform: rotate(-10deg);
+        transition: 0.3s;
+        &:hover {
+          border-radius: 5px;
+          background: $white__4;
+          scale: 1.1;
+          & {
+            color: $white__1;
+          }
+        }
+        .master__commentator {
+          font-family: $ff-light;
+          font-size: $text__2;
+        }
+        .master__comment-text {
+          font-family: $ff-regular;
+          font-size: $text__3;
+          width: 100%;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

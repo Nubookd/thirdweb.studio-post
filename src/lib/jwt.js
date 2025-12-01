@@ -9,7 +9,7 @@ if (!JWT_SECRET || !JWT_REFRESH_SECRET) {
 }
 
 const generateAccessToken = (payload) => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "1s" });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
 };
 
 const generateRefreshToken = (payload) => {
@@ -26,7 +26,6 @@ const verifyRefreshToken = (token) => {
 
 const refreshTokens = async (refreshToken) => {
   const decoded = verifyRefreshToken(refreshToken);
-  console.log(decoded)
 
   const storedToken = await UserModel.findRefreshToken(refreshToken);
   if (!storedToken) {

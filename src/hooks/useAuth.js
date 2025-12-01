@@ -160,8 +160,6 @@ export default function useAuth() {
       });
 
       const data = await res.json();
-      // console.log(data);
-      // console.log(res);
 
       if (res.ok) {
         localStorage.setItem("accessToken", data.accessToken);

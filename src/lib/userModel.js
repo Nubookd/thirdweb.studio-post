@@ -124,9 +124,6 @@ export default class User {
 
   static async updateRefreshToken(oldToken, newToken, expiresAt) {
     try {
-      console.log("🔄 Updating refresh token...");
-      console.log("Old token:", oldToken.substring(0, 20) + "...");
-      console.log("New token:", newToken.substring(0, 20) + "...");
 
       const res = await pool.query(
         `UPDATE refresh_tokens 
@@ -134,11 +131,6 @@ export default class User {
         WHERE token = $3 
         RETURNING id`,
         [newToken, expiresAt, oldToken]
-      );
-
-      console.log(
-        "Update result:",
-        res.rows[0] ? "success" : "no rows updated"
       );
       return res.rows[0];
     } catch (error) {

@@ -23,8 +23,10 @@
     border-radius: 5px;
     overflow: hidden;
     transition: all 0.3s ease;
-    height: 130px;
+    height: auto;
     span {
+      scrollbar-width: none;
+      display: flex;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -37,14 +39,12 @@
     }
     &:hover {
       background-color: $white__2;
-      transform: scale(1.05);
+      transform: scale(1.1);
       span {
         text-overflow: clip;
         white-space: normal;
-        overflow: auto;
         word-break: break-all;
         transition: all 0.3s ease;
-        
       }
     }
   }

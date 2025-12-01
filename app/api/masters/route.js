@@ -1,12 +1,4 @@
-import { Pool } from "pg";
-
-const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  database: "thirdweb.studio-post",
-  user: "post",
-  password: "post",
-});
+import pool from '@/lib/db'
 
 export async function GET(request) {
   try {

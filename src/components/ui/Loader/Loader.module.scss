@@ -1,0 +1,28 @@
+@use "../../../styles/variables.scss" as *;
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  aspect-ratio: 1;
+  color: $white__1;
+  z-index: 100;
+  scrollbar-width: none;
+  animation: rotation 2s ease infinite;
+}
+
+.loader-wrap {
+  position: absolute;
+  background: $white__2;
+  z-index: 10;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(-360deg);
+  }
+}
