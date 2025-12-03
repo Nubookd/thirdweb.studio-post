@@ -14,8 +14,10 @@
 
 .loader-wrap {
   position: absolute;
-  background: $white__2;
+  background: $white__4;
   z-index: 10;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 @keyframes rotation {
